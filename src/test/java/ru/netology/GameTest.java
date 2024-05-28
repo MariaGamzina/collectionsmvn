@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class GameTest {
 
     Game game = new Game();
-    ArrayList<Player> playersList = new ArrayList<>();
+
     Player player1 = new Player(11, "Иван Петров", 10);
     Player player2 = new Player(14, "Сергей Сидоров", 8);
     Player player3 = new Player(23, "Марина Новикова", 12);
@@ -20,8 +20,10 @@ public class GameTest {
     @Test
     public void shouldRoundPlayerNameOneWin() {
         Game game = new Game();
-        game.register(player1);
-        game.register(player3);
+
+        game.register("one", player1);
+
+        game.register("three", player3);
 
 
         int expected = 1;
@@ -34,8 +36,9 @@ public class GameTest {
     @Test
     public void shouldRoundPlayerNameTwoWin() {
         Game game = new Game();
-        game.register(player1);
-        game.register(player3);
+        game.register("one", player1);
+
+        game.register("three", player3);
 
 
         int expected = 2;
@@ -48,8 +51,8 @@ public class GameTest {
     @Test
     public void shouldRoundPlayerBothWin() {
         Game game = new Game();
-        game.register(player5);
-        game.register(player3);
+        game.register("five", player5);
+        game.register("three", player3);
 
 
         int expected = 0;
@@ -63,7 +66,7 @@ public class GameTest {
     public void shouldRoundPlayerNoRegisterTwo() {
         Game game = new Game();
 
-        game.register(player3);
+        game.register("three", player3);
 
 
         Assertions.assertThrows(NotRegisteredException.class, () -> game.round("Марина Новикова", "Иван Иванов"));
@@ -75,7 +78,7 @@ public class GameTest {
     public void shouldRoundPlayerNoRegisterOne() {
         Game game = new Game();
 
-        game.register(player3);
+        game.register("three", player3);
 
 
         Assertions.assertThrows(NotRegisteredException.class, () -> game.round("Иван Иванов", "Марина Новикова"));
